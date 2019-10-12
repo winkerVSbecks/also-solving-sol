@@ -3,11 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "canvas-sketch": "^0.7.0",
+    "canvas-sketch-cli": "^1.11.4",
+    "canvas-sketch-util": "^1.10.0",
+    "polygon-clipping": "^0.14.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "tachyons": "^4.11.1"
   },
   "scripts": {
+    "sketch": "canvas-sketch --output=tmp --stream=gif",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -27,5 +34,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20"
   }
 }

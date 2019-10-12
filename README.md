@@ -1,8 +1,15 @@
+# Also Solving Sol
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run sketch sketches/<sketch-name>.js`
+
+Uses [canvas-sketch](https://github.com/mattdesl/canvas-sketch) to start a development server that handles browser reload on file save, high-quality PNG exporting, and other features. For more info, see [Installing and Using canvas-sketch](https://github.com/mattdesl/canvas-sketch/blob/master/docs/installation.md)
+
 
 ### `npm start`
 
@@ -12,11 +19,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
 
 Builds the app for production to the `build` folder.<br />
@@ -25,44 +27,34 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+https://massmoca.org/sol-lewitt/
+http://radicalart.info/concept/LeWitt/
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Wall Drawing 852**
+A wall divided from the upper left to the lower right by a curvy line; left: glossy yellow; right: glossy purple.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Also, Wall Drawing 853, which depicts a square containing red and green divided by a wavy line and a square containing orange and blue divided by a wavy line.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+https://massmoca.org/event/walldrawing852/
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Wall Drawing 1171**
+Five degrees of scribbles: A cube without a cube; A cube without a corner.
+https://massmoca.org/event/walldrawing1171/
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+**Wall Drawing 411B D E**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Wall Drawing 411B: Isometric figure with progressively darker gradations of gray ink wash on each plane, 1984
+Wall Drawing 411D: Isometric figure with progressively darker gradations of gray ink wash on each plane, 1984
+Wall Drawing 411E: Isometric figure with progressively darker gradations of gray ink wash on each plane, 2003
 
-### Analyzing the Bundle Size
+https://diaart.org/program/exhibitions-projects/sol-lewitt-collection-display
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**Wall Drawing 579**
+Three concentric arches. The outside one is blue; the middle red; and the inside one is yellow.
+https://massmoca.org/event/walldrawing579/
