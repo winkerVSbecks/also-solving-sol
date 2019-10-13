@@ -1,9 +1,4 @@
-/**
- * Wall Drawing 1113
- * On a wall, a triangle within a rectangle,
- * each with broken bands of color.
- */
-const canvasSketch = require('canvas-sketch');
+// const canvasSketch = require('canvas-sketch');
 const { lerpArray, linspace } = require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random');
 const polygonClipping = require('polygon-clipping');
@@ -20,7 +15,6 @@ const colors = [
   '#1DAE41',
   '#0D7CE7',
 ];
-const bandSize = side / colors.length;
 const triangleBandCount = 9 + 15;
 const rectBandCount = 14 + 24;
 const centroid = [side / 2, (2 * height) / 3];
@@ -31,6 +25,8 @@ const settings = {
   fps: 8,
   playbackRate: 'throttle',
   duration: 4,
+  scaleToView: true,
+  styleCanvas: false,
 };
 
 const sketch = () => {
@@ -77,10 +73,10 @@ const sketch = () => {
   };
 };
 
-canvasSketch(sketch, settings);
+sketch.settings = settings;
+export default sketch;
 
-module.exports = sketch;
-module.exports.settings = settings;
+// canvasSketch(sketch, settings);
 
 /**
  * Draw band

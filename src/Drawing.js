@@ -1,20 +1,23 @@
 import React from 'react';
+import canvasSketch from 'canvas-sketch';
 
-export default () => (
-  <a className="db center mw5 black link dim"
-   title="Frank Ocean's Blonde on Apple Music"
-   href="https://geo.itunes.apple.com/us/album/blonde/id1146195596?at=1l3vqFJ&mt=1&app=music">
+export default React.memo(({ sketch, title, instructions }) => {
+  const canvasEl = React.useRef(null);
 
-  <img className="db ba b--black-10"/
-       alt="Frank Ocean Blonde Album Cover"
-       src="https://s3-us-west-1.amazonaws.com/tachyonsio/img/Blonde-Frank_Ocean.jpeg"
-  >
+  React.useEffect(() => {
+    canvasSketch(
+      sketch,
+      Object.assign({}, sketch.settings, { canvas: canvasEl.current }),
+    );
+  }, [canvasEl, sketch]);
 
-  <dl className="mt2 f6 lh-copy">
-    <dt className="clip">Title</dt>
-    <dd className="ml0 fw9">Blonde</dd>
-    <dt className="clip">Artist</dt>
-    <dd className="ml0 gray">Frank Ocean</dd>
-  </dl>
-</a>
-)
+  return (
+    <div className="measure-wide center">
+      <h2 className="gray f6 fw8 mb2 ttu tracked lh-title">
+        Wall Drawing #{title}
+      </h2>
+      <p className="f5 gray mt0 mb4 lh-copy">{instructions}</p>
+      <canvas className="db w-100" ref={canvasEl} />
+    </div>
+  );
+});
