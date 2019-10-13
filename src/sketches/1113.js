@@ -21,7 +21,7 @@ const centroid = [side / 2, (2 * height) / 3];
 
 const settings = {
   dimensions: [side, height],
-  animate: true,
+  // animate: true,
   fps: 8,
   playbackRate: 'throttle',
   duration: 4,
