@@ -4,7 +4,7 @@ const random = require('canvas-sketch-util/random');
 const polygonClipping = require('polygon-clipping');
 
 const settings = {
-  dimensions: [800, 600],
+  dimensions: [1600, 900],
   scaleToView: true,
   styleCanvas: false,
 };
@@ -16,19 +16,22 @@ const sketch = () => {
     context.lineJoin = 'round';
 
     const side = height * 0.4;
-    const off = { x: 0, y: (height - 1.5 * side) / 2 };
+    const off = {
+      x: (width - 1.5 * side * 2) / 3,
+      y: (height - 1.5 * side) / 2,
+    };
 
-    const c1 = cube({ side, at: [0, height - off.y] });
+    const c1 = cube({ side, at: [off.x, height - off.y] });
     renderCube(context)(c1);
 
     const c2 = cube({
       side: side / 2,
-      at: [side / 2, height - side / 2 - off.y],
+      at: [off.x + side / 2, height - side / 2 - off.y],
       faces: '456',
     });
     renderCube(context)(c2);
 
-    const c3 = cube({ side, at: [width - 1.5 * side, height - off.y] });
+    const c3 = cube({ side, at: [width - 1.5 * side - off.x, height - off.y] });
     renderCube(context)(c3);
   };
 };
@@ -52,39 +55,26 @@ export default sketch;
 function cube({ side: s, faces = '123', at: [x, y] }) {
   const o = s / 2;
 
-  if (faces === '123') {
-    return [
-      // 1
-      [[0, 0], [s, 0], [s, -s], [0, -s]],
-      // 2
-      [[0, -s], [o, -s - o], [o + s, -s - o], [s, -s]],
-      // 3
-      [[s, -s], [o + s, -s - o], [o + s, -o], [s, 0]],
-    ].map(p => p.map(([x1, y1]) => [x1 + x, y1 + y]));
+  const paths =
+    faces === '123'
+      ? [
+          // 1
+          [[0, 0], [s, 0], [s, -s], [0, -s]],
+          // 2
+          [[0, -s], [o, -s - o], [o + s, -s - o], [s, -s]],
+          // 3
+          [[s, -s], [o + s, -s - o], [o + s, -o], [s, 0]],
+        ]
+      : [
+          // 4
+          [[0, 0], [0, -s], [o, -s - o], [o, -o]],
+          // 5
+          [[o, -s - o], [o + s, -s - o], [o + s, -o], [o, -o]],
+          // 6
+          [[0, 0], [o, -o], [o + s, -o], [0 + s, 0]],
+        ];
 
-    return [
-      // 1
-      [[x, y], [x + s, y], [x + s, y - s], [x, y - s]],
-      // 2
-      [[x, y - s], [x + o, y - s - o], [x + o + s, y - s - o], [x + s, y - s]],
-      // 3
-      [[x + s, y - s], [x + o + s, y - s - o], [x + o + s, y - o], [x + s, y]],
-    ];
-  } else {
-    return [
-      // 4
-      [[x, y], [x, y - s], [x + o, y - s - o], [x + o, y - o]],
-      // 5
-      [
-        [x + o, y - s - o],
-        [x + o + s, y - s - o],
-        [x + o + s, y - o],
-        [x + o, y - o],
-      ],
-      // 6
-      [[x, y], [x + o, y - o], [x + o + s, y - o], [x + s, y]],
-    ];
-  }
+  return paths.map(p => p.map(([x1, y1]) => [x1 + x, y1 + y]));
 }
 
 function renderCube(context) {
