@@ -14,7 +14,7 @@ export default () => (
           <Gallery />
         </Route>
         {drawingConfig.map(routeConfig => (
-          <Route {...routeConfig} />
+          <Route key={routeConfig.title} {...routeConfig} />
         ))}
       </Switch>
     </main>
