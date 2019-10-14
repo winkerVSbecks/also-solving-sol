@@ -1,13 +1,3 @@
-/**
- *            r = side * Math.cos(45)
- *           (x + r * Math.sin(45), y + r * Math.cos(45))
- *         = (x + side / 2, y + side / 2)
- *          /
- *        /
- *      /
- *    /
- *  (x,y)
- */
 // const canvasSketch = require('canvas-sketch');
 const { lerpArray, linspace } = require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random');
@@ -23,29 +13,23 @@ const sketch = () => {
   return ({ context, width, height }) => {
     context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
-    const w = width;
-    const h = height;
-    const s = w / 4;
-    const o = s / 2;
+    context.lineJoin = 'round';
 
-    // prettier-ignore
-    const cube = [
-      [[0, h], [s, h], [s, h - s], [0, h - s]],
-      [
-        [0, h - s],
-        [0 + o, h - s - o],
-        [0 + o + s, h - s - o],
-        [s, h - s]
-      ],
-      [
-        [s, h - s],
-        [0 + o + s, h - s - o],
-        [0 + o + s, h - o],
-        [s, h]
-      ]
-    ];
+    const side = height * 0.4;
+    const off = { x: 0, y: (height - 1.5 * side) / 2 };
 
-    renderCube(context)(cube);
+    const c1 = cube({ side, at: [0, height - off.y] });
+    renderCube(context)(c1);
+
+    const c2 = cube({
+      side: side / 2,
+      at: [side / 2, height - side / 2 - off.y],
+      faces: '456',
+    });
+    renderCube(context)(c2);
+
+    const c3 = cube({ side, at: [width - 1.5 * side, height - off.y] });
+    renderCube(context)(c3);
   };
 };
 
@@ -53,6 +37,55 @@ sketch.settings = settings;
 export default sketch;
 
 // canvasSketch(sketch, settings);
+
+/**
+ * 3D cube to 2D paths using cabinet projection
+ *           (x + r * Math.sin(45), y - r * Math.cos(45))
+ *              where r = side * Math.cos(45)
+ *         = (x + side / 2, y - side / 2)
+ *          /
+ *        /
+ *      /
+ *    /
+ *  (x,y)
+ */
+function cube({ side: s, faces = '123', at: [x, y] }) {
+  const o = s / 2;
+
+  if (faces === '123') {
+    return [
+      // 1
+      [[0, 0], [s, 0], [s, -s], [0, -s]],
+      // 2
+      [[0, -s], [o, -s - o], [o + s, -s - o], [s, -s]],
+      // 3
+      [[s, -s], [o + s, -s - o], [o + s, -o], [s, 0]],
+    ].map(p => p.map(([x1, y1]) => [x1 + x, y1 + y]));
+
+    return [
+      // 1
+      [[x, y], [x + s, y], [x + s, y - s], [x, y - s]],
+      // 2
+      [[x, y - s], [x + o, y - s - o], [x + o + s, y - s - o], [x + s, y - s]],
+      // 3
+      [[x + s, y - s], [x + o + s, y - s - o], [x + o + s, y - o], [x + s, y]],
+    ];
+  } else {
+    return [
+      // 4
+      [[x, y], [x, y - s], [x + o, y - s - o], [x + o, y - o]],
+      // 5
+      [
+        [x + o, y - s - o],
+        [x + o + s, y - s - o],
+        [x + o + s, y - o],
+        [x + o, y - o],
+      ],
+      // 6
+      [[x, y], [x + o, y - o], [x + o + s, y - o], [x + s, y]],
+    ];
+  }
+}
 
 function renderCube(context) {
   return segments => {
