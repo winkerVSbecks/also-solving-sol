@@ -1,6 +1,5 @@
 // const canvasSketch = require('canvas-sketch');
-const { lerpArray, linspace } = require('canvas-sketch-util/math');
-const random = require('canvas-sketch-util/random');
+const { lerpArray } = require('canvas-sketch-util/math');
 
 const grays = [
   '#333333', // 0

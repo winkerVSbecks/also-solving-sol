@@ -39,12 +39,6 @@ Also, Wall Drawing 853, which depicts a square containing red and green divided 
 https://massmoca.org/event/walldrawing852/
 
 
-**Wall Drawing 1171**
-
-Five degrees of scribbles: A cube without a cube; A cube without a corner.
-https://massmoca.org/event/walldrawing1171/
-
-
 **Wall Drawing 411B D E**
 
 Wall Drawing 411B: Isometric figure with progressively darker gradations of gray ink wash on each plane, 1984
