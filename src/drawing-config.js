@@ -3,6 +3,7 @@ import Drawing from './Drawing';
 import sketch1113 from './sketches/1113';
 import image1113 from './images/1113.png';
 import sketch1171 from './sketches/1171';
+import image1171 from './images/1171.png';
 
 export default [
   {
@@ -20,11 +21,13 @@ export default [
   {
     title: '1171',
     path: '/1171',
+    image: image1171,
     component: () => (
       <Drawing
         sketch={sketch1171}
         title="1171"
         instructions="Five degrees of scribbles: A cube without a cube; A cube without a corner."
+        noiseTexture
       />
     ),
   },

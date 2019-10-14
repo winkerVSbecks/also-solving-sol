@@ -1,7 +1,17 @@
 // const canvasSketch = require('canvas-sketch');
 const { lerpArray, linspace } = require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random');
-const polygonClipping = require('polygon-clipping');
+
+const grays = [
+  '#333333', // 0
+  '#555555', // 1
+  '#777777', // 2
+  '#999999', // 3
+  '#AAAAAA', // 4
+  '#CCCCCC', // 5
+  '#EEEEEE', // 6
+  '#F4F4F4', // 7
+];
 
 const settings = {
   dimensions: [1600, 900],
@@ -11,28 +21,38 @@ const settings = {
 
 const sketch = () => {
   return ({ context, width, height }) => {
-    context.fillStyle = 'white';
+    context.fillStyle = grays[6];
     context.fillRect(0, 0, width, height);
     context.lineJoin = 'round';
 
-    const side = height * 0.4;
+    const side = height * 0.5;
     const off = {
       x: (width - 1.5 * side * 2) / 3,
       y: (height - 1.5 * side) / 2,
     };
 
-    const c1 = cube({ side, at: [off.x, height - off.y] });
-    renderCube(context)(c1);
+    const cube1 = cube({ side, at: [off.x, height - off.y] });
+    renderCube(context)(cube1, [grays[5], grays[4], grays[3]]);
 
-    const c2 = cube({
+    const missingCube = cube({
       side: side / 2,
       at: [off.x + side / 2, height - side / 2 - off.y],
       faces: '456',
     });
-    renderCube(context)(c2);
+    renderCube(context)(missingCube, [grays[3], grays[5], grays[4]]);
 
-    const c3 = cube({ side, at: [width - 1.5 * side - off.x, height - off.y] });
-    renderCube(context)(c3);
+    const cube2 = cube({
+      side,
+      at: [width - 1.5 * side - off.x, height - off.y],
+    });
+    renderCube(context)(cube2, [grays[5], grays[4], grays[3]]);
+
+    const cube2Corner = corner({
+      side,
+      t: 0.5,
+      at: [width - 1.5 * side - off.x, height - off.y],
+    });
+    renderPath(context, cube2Corner, grays[2]);
   };
 };
 
@@ -77,18 +97,34 @@ function cube({ side: s, faces = '123', at: [x, y] }) {
   return paths.map(p => p.map(([x1, y1]) => [x1 + x, y1 + y]));
 }
 
+function corner({ side: s, t = 0.5, at: [x, y] }) {
+  const o = s / 2;
+
+  const path = [
+    lerpArray([s, -s], [0, -s], t),
+    lerpArray([s, -s], [s + o, -s - o], t),
+    lerpArray([s, -s], [s, 0], t),
+  ];
+
+  return path.map(([x1, y1]) => [x1 + x, y1 + y]);
+}
+
 function renderCube(context) {
-  return segments => {
+  return (segments, colors) => {
     segments.forEach((path, idx) => {
-      const [first, ...rest] = path;
-      context.beginPath();
-      context.strokeStyle = 'black';
-      context.moveTo(...first);
-      rest.forEach(p => {
-        context.lineTo(...p);
-      });
-      context.closePath();
-      context.stroke();
+      renderPath(context, path, colors[idx]);
     });
   };
+}
+
+function renderPath(context, path, color) {
+  const [first, ...rest] = path;
+  context.beginPath();
+  context.fillStyle = color;
+  context.moveTo(...first);
+  rest.forEach(p => {
+    context.lineTo(...p);
+  });
+  context.closePath();
+  context.fill();
 }
