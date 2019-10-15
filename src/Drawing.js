@@ -20,17 +20,6 @@ export default React.memo(
         </h2>
         <p className="f5 gray mt0 mb4 lh-copy">{instructions}</p>
 
-        <svg xmlns="http://www.w3.org/2000/svg" className="dn">
-          <filter id="noise" x="0" y="0">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.75"
-              numOctaves="12"
-              stitchTiles="stitch"
-            />
-          </filter>
-        </svg>
-
         <div className="relative overflow-hidden">
           <canvas className="db w-100" ref={canvasEl} />
           <div
@@ -50,3 +39,16 @@ export default React.memo(
     );
   },
 );
+
+{
+  /* <svg xmlns="http://www.w3.org/2000/svg" className="dn">
+  <filter id="noise" x="0" y="0">
+    <feTurbulence
+      type="fractalNoise"
+      baseFrequency="0.75"
+      numOctaves="12"
+      stitchTiles="stitch"
+    />
+  </filter>
+</svg>; */
+}

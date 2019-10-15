@@ -1,4 +1,4 @@
-const random = require('canvas-sketch-util/random');
+const Tweakpane = require('tweakpane');
 const { lerpArray } = require('canvas-sketch-util/math');
 
 const grays = [
@@ -16,15 +16,39 @@ const settings = {
   dimensions: [1600, 900],
   scaleToView: true,
   styleCanvas: false,
+  animate: true,
 };
 
 const sketch = () => {
+  const pane = new Tweakpane();
+  const PARAMS = {
+    ['Cube Size']: 0.5,
+    ['Missing Cube Size']: 0.5,
+    ['Corner Size']: 0.5,
+  };
+  const f1171 = pane.addFolder({
+    title: '1171 Params',
+  });
+
+  f1171.addInput(PARAMS, 'Cube Size', {
+    min: 0,
+    max: 1,
+  });
+  f1171.addInput(PARAMS, 'Missing Cube Size', {
+    min: 0,
+    max: 1,
+  });
+  f1171.addInput(PARAMS, 'Corner Size', {
+    min: 0,
+    max: 1,
+  });
+
   return ({ context, width, height }) => {
     context.fillStyle = grays[6];
     context.fillRect(0, 0, width, height);
     context.lineJoin = 'round';
 
-    const side = height * random.range(0.4, 0.8); // 0.5
+    const side = height * PARAMS['Cube Size'];
 
     const off = {
       x: (width - 1.5 * side * 2) / 3,
@@ -34,9 +58,9 @@ const sketch = () => {
     const cube1 = cube({ side, at: [off.x, height - off.y] });
     renderCube(context)(cube1, [grays[5], grays[4], grays[3]]);
 
-    const missingSide = side * random.range(0.4, 0.6);
+    const missingSide = PARAMS['Missing Cube Size'] * side;
     const missingCube = cube({
-      side: missingSide, // side / 2
+      side: missingSide,
       at: [off.x + side - missingSide, height - (side - missingSide) - off.y],
       faces: '456',
     });
@@ -50,7 +74,7 @@ const sketch = () => {
 
     const cube2Corner = corner({
       side,
-      t: random.range(0.2, 0.8), // 0.5
+      t: PARAMS['Corner Size'],
       at: [width - 1.5 * side - off.x, height - off.y],
     });
     renderPath(context, cube2Corner, grays[2]);
