@@ -1,4 +1,4 @@
-// const canvasSketch = require('canvas-sketch');
+const random = require('canvas-sketch-util/random');
 const { lerpArray } = require('canvas-sketch-util/math');
 
 const grays = [
@@ -24,7 +24,8 @@ const sketch = () => {
     context.fillRect(0, 0, width, height);
     context.lineJoin = 'round';
 
-    const side = height * 0.5;
+    const side = height * random.range(0.4, 0.8); // 0.5
+
     const off = {
       x: (width - 1.5 * side * 2) / 3,
       y: (height - 1.5 * side) / 2,
@@ -33,9 +34,10 @@ const sketch = () => {
     const cube1 = cube({ side, at: [off.x, height - off.y] });
     renderCube(context)(cube1, [grays[5], grays[4], grays[3]]);
 
+    const missingSide = side * random.range(0.4, 0.6);
     const missingCube = cube({
-      side: side / 2,
-      at: [off.x + side / 2, height - side / 2 - off.y],
+      side: missingSide, // side / 2
+      at: [off.x + side - missingSide, height - (side - missingSide) - off.y],
       faces: '456',
     });
     renderCube(context)(missingCube, [grays[3], grays[5], grays[4]]);
@@ -48,7 +50,7 @@ const sketch = () => {
 
     const cube2Corner = corner({
       side,
-      t: 0.5,
+      t: random.range(0.2, 0.8), // 0.5
       at: [width - 1.5 * side - off.x, height - off.y],
     });
     renderPath(context, cube2Corner, grays[2]);

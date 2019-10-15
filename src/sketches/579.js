@@ -1,3 +1,5 @@
+const random = require('canvas-sketch-util/random');
+
 const colors = {
   yellow: '#F4D02D',
   pink: '#D13F6A',
@@ -16,7 +18,7 @@ const sketch = () => {
     context.fillRect(0, 0, width, height);
     const renderArch = arch(context);
 
-    const archWidth = width / 8;
+    const archWidth = random.range(width / 9, width / 6);
 
     renderArch({
       x: width / 2,
