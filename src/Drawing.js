@@ -40,8 +40,7 @@ export default React.memo(
   },
 );
 
-{
-  /* <svg xmlns="http://www.w3.org/2000/svg" className="dn">
+/* <svg xmlns="http://www.w3.org/2000/svg" className="dn">
   <filter id="noise" x="0" y="0">
     <feTurbulence
       type="fractalNoise"
@@ -51,4 +50,3 @@ export default React.memo(
     />
   </filter>
 </svg>; */
-}

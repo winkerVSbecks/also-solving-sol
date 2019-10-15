@@ -14,12 +14,11 @@ const settings = {
 };
 
 const sketch = () => {
-  const pane = new Tweakpane();
-  const PARAMS = { ['Arch Width']: 0.125 };
-  const f579 = pane.addFolder({
+  const pane = new Tweakpane({
     title: '579 Params',
   });
-  f579.addInput(PARAMS, 'Arch Width', {
+  const PARAMS = { 'Arch Width': 0.125 };
+  pane.addInput(PARAMS, 'Arch Width', {
     min: 0,
     max: 0.5,
   });

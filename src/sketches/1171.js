@@ -20,25 +20,24 @@ const settings = {
 };
 
 const sketch = () => {
-  const pane = new Tweakpane();
-  const PARAMS = {
-    ['Cube Size']: 0.5,
-    ['Missing Cube Size']: 0.5,
-    ['Corner Size']: 0.5,
-  };
-  const f1171 = pane.addFolder({
+  const pane = new Tweakpane({
     title: '1171 Params',
   });
+  const PARAMS = {
+    'Cube Size': 0.5,
+    'Missing Cube Size': 0.5,
+    'Corner Size': 0.5,
+  };
 
-  f1171.addInput(PARAMS, 'Cube Size', {
+  pane.addInput(PARAMS, 'Cube Size', {
     min: 0,
     max: 1,
   });
-  f1171.addInput(PARAMS, 'Missing Cube Size', {
+  pane.addInput(PARAMS, 'Missing Cube Size', {
     min: 0,
     max: 1,
   });
-  f1171.addInput(PARAMS, 'Corner Size', {
+  pane.addInput(PARAMS, 'Corner Size', {
     min: 0,
     max: 1,
   });
