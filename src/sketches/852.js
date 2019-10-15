@@ -1,11 +1,10 @@
 const random = require('canvas-sketch-util/random');
-const { lerp } = require('canvas-sketch-util/math');
+const { lerp, linspace } = require('canvas-sketch-util/math');
 const Tweakpane = require('tweakpane');
 
 const colors = {
-  yellow: '#F4D02D',
-  pink: '#D13F6A',
-  blue: '#32A5CD',
+  yellow: 'yellow',
+  purple: 'purple',
 };
 
 const settings = {
@@ -46,7 +45,25 @@ const sketch = () => {
       steps: 150,
     });
 
-    renderPath(context, wavyLine, '#000');
+    context.fillStyle = colors.purple;
+    context.beginPath();
+    renderPath(context, wavyLine);
+    context.lineTo(width, 0);
+    context.closePath();
+    context.fill();
+
+    context.fillStyle = colors.yellow;
+    context.beginPath();
+    renderPath(context, wavyLine);
+    context.lineTo(0, height);
+    context.closePath();
+    context.fill();
+
+    // context.strokeStyle = '#fff';
+    // context.lineWidth = width * 0.0075 * 4;
+    // context.beginPath();
+    // renderPath(context, wavyLine);
+    // context.stroke();
   };
 };
 
@@ -75,40 +92,35 @@ function noiseLine(opt = {}) {
 
   // Create a line by walking N steps and interpolating
   // from start to end point at each interval
-  const path = [];
-  for (let i = 0; i < steps; i++) {
+  const path = linspace(steps).map((_, i) => {
     // Get interpolation factor between 0..1
     const t = i / (steps - 1);
 
     // Interpolate X position
     let x = lerp(xStart, xEnd, t);
-
     // Interpolate Y position
     let y = lerp(yStart, yEnd, t);
 
     // Offset X Y position by noise
+    // Orthogonal to the direction of the line
     const amp = Math.sin(lerp(0, Math.PI, t)) * amplitude;
     const diff =
       random.noise3D(t * frequency + time, v * frequency, time) * amp;
-    console.log(i, diff);
+
     y += diff * Math.sin(angle);
     x -= diff * Math.cos(angle);
 
-    // Place vertex
-    path.push([x, y]);
-  }
+    return [x, y];
+  });
+
   return path;
 }
 
-function renderPath(context, path, color) {
+function renderPath(context, path) {
   const [first, ...rest] = path;
-  context.beginPath();
-  context.strokeStyle = color;
-  context.lineWidth = 4;
   context.lineJoin = 'round';
   context.moveTo(...first);
   rest.forEach(p => {
     context.lineTo(...p);
   });
-  context.stroke();
 }
