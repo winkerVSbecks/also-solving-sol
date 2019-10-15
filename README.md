@@ -31,6 +31,7 @@ Uses [canvas-sketch](https://github.com/mattdesl/canvas-sketch) to start a devel
 https://massmoca.org/sol-lewitt/
 http://radicalart.info/concept/LeWitt/
 
+- [ ] https://massmoca.org/event/walldrawing88/
 
 **Wall Drawing 852**
 A wall divided from the upper left to the lower right by a curvy line; left: glossy yellow; right: glossy purple.
