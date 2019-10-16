@@ -8,6 +8,8 @@ import sketch579 from './sketches/579';
 import image579 from './images/579.png';
 import sketch852 from './sketches/852';
 import image852 from './images/852.png';
+import sketch88 from './sketches/88';
+import image88 from './images/88.png';
 
 export default [
   {
@@ -57,6 +59,19 @@ export default [
         sketch={sketch852}
         title="852"
         instructions="A wall divided from the upper left to the lower right by a curvy line; left: glossy yellow; right: glossy purple."
+      />
+    ),
+  },
+  {
+    title: '88',
+    path: '/88',
+    image: image88,
+    component: () => (
+      <Drawing
+        sketch={sketch88}
+        title="88"
+        width="mw7"
+        instructions="A 6-inch (15 cm) grid covering the wall. Within each square, not straight lines in either of four directions. Only one direction in each square but as many as desired, and at least one line in each square."
       />
     ),
   },
