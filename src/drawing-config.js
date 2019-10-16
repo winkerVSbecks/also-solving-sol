@@ -7,7 +7,7 @@ import image1171 from './images/1171.png';
 import sketch579 from './sketches/579';
 import image579 from './images/579.png';
 import sketch852 from './sketches/852';
-// import image852 from './images/852.png';
+import image852 from './images/852.png';
 
 export default [
   {
@@ -51,7 +51,7 @@ export default [
   {
     title: '852',
     path: '/852',
-    // image: image852,
+    image: image852,
     component: () => (
       <Drawing
         sketch={sketch852}

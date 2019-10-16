@@ -3,12 +3,12 @@ const { lerp, linspace } = require('canvas-sketch-util/math');
 const Tweakpane = require('tweakpane');
 
 const colors = {
-  yellow: 'yellow',
-  purple: 'purple',
+  yellow: '#FFEC04',
+  purple: '#3229AD',
 };
 
 const settings = {
-  dimensions: [1200, 1200],
+  dimensions: [800, 600],
   scaleToView: true,
   styleCanvas: false,
   animate: true,
@@ -45,25 +45,8 @@ const sketch = () => {
       steps: 150,
     });
 
-    context.fillStyle = colors.purple;
-    context.beginPath();
-    renderPath(context, wavyLine);
-    context.lineTo(width, 0);
-    context.closePath();
-    context.fill();
-
-    context.fillStyle = colors.yellow;
-    context.beginPath();
-    renderPath(context, wavyLine);
-    context.lineTo(0, height);
-    context.closePath();
-    context.fill();
-
-    // context.strokeStyle = '#fff';
-    // context.lineWidth = width * 0.0075 * 4;
-    // context.beginPath();
-    // renderPath(context, wavyLine);
-    // context.stroke();
+    renderBlock(context, wavyLine, [width, 0], colors.purple);
+    renderBlock(context, wavyLine, [0, height], colors.yellow);
   };
 };
 
@@ -74,6 +57,7 @@ export default sketch;
 
 /**
  * Draw a wavy line
+ * based on https://glitch.com/edit/#!/p5-example-noise-lines
  */
 function noiseLine(opt = {}) {
   const {
@@ -116,11 +100,18 @@ function noiseLine(opt = {}) {
   return path;
 }
 
-function renderPath(context, path) {
+function renderBlock(context, path, connector, color) {
   const [first, ...rest] = path;
   context.lineJoin = 'round';
+  context.fillStyle = color;
+
+  context.beginPath();
   context.moveTo(...first);
   rest.forEach(p => {
     context.lineTo(...p);
   });
+  context.lineTo(...connector);
+  context.closePath();
+
+  context.fill();
 }
