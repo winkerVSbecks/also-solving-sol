@@ -31,15 +31,6 @@ Uses [canvas-sketch](https://github.com/mattdesl/canvas-sketch) to start a devel
 https://massmoca.org/sol-lewitt/
 http://radicalart.info/concept/LeWitt/
 
-- [ ] https://massmoca.org/event/walldrawing88/
-
-**Wall Drawing 852**
-A wall divided from the upper left to the lower right by a curvy line; left: glossy yellow; right: glossy purple.
-
-Also, Wall Drawing 853, which depicts a square containing red and green divided by a wavy line and a square containing orange and blue divided by a wavy line.
-https://massmoca.org/event/walldrawing852/
-
-
 **Wall Drawing 411B D E**
 
 Wall Drawing 411B: Isometric figure with progressively darker gradations of gray ink wash on each plane, 1984
@@ -49,8 +40,3 @@ Wall Drawing 411D: Isometric figure with progressively darker gradations of gray
 Wall Drawing 411E: Isometric figure with progressively darker gradations of gray ink wash on each plane, 2003
 https://diaart.org/program/exhibitions-projects/sol-lewitt-collection-display
 
-
-**Wall Drawing 579**
-
-Three concentric arches. The outside one is blue; the middle red; and the inside one is yellow.
-https://massmoca.org/event/walldrawing579/
