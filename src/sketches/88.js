@@ -1,4 +1,4 @@
-const rough = require('roughjs/dist/rough.umd');
+// const rough = require('roughjs/dist/rough.umd');
 const random = require('canvas-sketch-util/random');
 const { lerp, linspace } = require('canvas-sketch-util/math');
 
@@ -8,12 +8,12 @@ const settings = {
   styleCanvas: false,
 };
 
-let roughCanvas;
+// let roughCanvas;
 
 // A 6-inch (15 cm) grid covering the wall. Within each square, not straight lines in either of four directions.
 // Only one direction in each square but as many as desired, and at least one line in each square.
 const sketch = ({ canvas }) => {
-  roughCanvas = rough.canvas(canvas);
+  // roughCanvas = rough.canvas(canvas);
 
   return ({ context, width, height, time }) => {
     context.clearRect(0, 0, width, height);
